@@ -7,7 +7,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthService {
 
   authToken: any;
-  user: any;
+  //user: any;
 
   constructor(private http: Http ) { }
 
@@ -38,11 +38,11 @@ export class AuthService {
   }
 
   // Set local storage
-  storeUserData(token, user){
+  storeUserData(token){
     localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    //localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
-    this.user = user
+    //this.user = user
   }
 
   loadToken(){
@@ -61,7 +61,7 @@ export class AuthService {
   // Log out
   logout(){
     this.authToken = null;
-    this.user = null;
+    //this.user = null;
     localStorage.clear();
   }
 

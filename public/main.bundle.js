@@ -357,7 +357,7 @@ var LoginComponent = (function () {
         };
         this.authService.authenticateUser(user).subscribe(function (data) {
             if (data.success) {
-                _this.authService.storeUserData(data.token, data.user);
+                _this.authService.storeUserData(data.token);
                 _this.flashMessage.show('You are now logged in', {
                     cssClass: 'alert-success',
                     timeout: 5000
@@ -775,6 +775,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AuthService = (function () {
+    //user: any;
     function AuthService(http) {
         this.http = http;
     }
@@ -802,11 +803,11 @@ var AuthService = (function () {
             .map(function (res) { return res.json(); });
     };
     // Set local storage
-    AuthService.prototype.storeUserData = function (token, user) {
+    AuthService.prototype.storeUserData = function (token) {
         localStorage.setItem('id_token', token);
-        localStorage.setItem('user', JSON.stringify(user));
+        //localStorage.setItem('user', JSON.stringify(user));
         this.authToken = token;
-        this.user = user;
+        //this.user = user
     };
     AuthService.prototype.loadToken = function () {
         var token = localStorage.getItem('id_token');
@@ -820,7 +821,7 @@ var AuthService = (function () {
     // Log out
     AuthService.prototype.logout = function () {
         this.authToken = null;
-        this.user = null;
+        //this.user = null;
         localStorage.clear();
     };
     return AuthService;
